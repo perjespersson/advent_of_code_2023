@@ -206,33 +206,20 @@ Card 204: 20 50 78 99 25 67 80 86 54 47 | 62 64 51 14 83 79 61 37  4 98 16 85 27
 Card 205: 85 47  9 91 79 52 28 26 19 33 | 61 75 46 17 16 34 98  3 62 56 74 54 88 99  2 57  4 78 32 72 97 81 90 64 63
 Card 206: 80 39 46 82 49 98 73 32 85 15 | 90 60 47 54 59 41 20 33 92 11 88 61 99 84 94 78 71 35 55  2 51 40 67 18 66"
 
-copy_hash = Hash.new(0)
+number_of_scratchcards = Hash.new(0)
 input.each_line.with_index do |line, index|
-    card_number = index+1
-    # Winning numbers
     winning_numbers = line.partition(":").last.partition("|").first.split
-
-    # Card numbers
     card_numbers = line.partition(":").last.partition("|").last.split
-
     number_of_winning_numbers = (card_numbers & winning_numbers).count
+    current_card_number = index + 1
+    new_copies = number_of_winning_numbers == 0 ? [] : (current_card_number + 1)..(current_card_number + number_of_winning_numbers)
 
-    new_copies_to_add = number_of_winning_numbers == 0 ? [] : (card_number + 1)..(card_number + number_of_winning_numbers)
-    old_copies = copy_hash[card_number].nil? ? 0 : copy_hash[card_number]
-
-    #puts "=================="
-    #puts "Card: #{card_number}"
-    #puts "Already existing copies of card: #{old_copies}"
-    #puts "Number of winning numbers: #{number_of_winning_numbers}"
-    #puts "New copies to add: #{new_copies_to_add.inspect}"
-    #puts "=================="
-
-    new_copies_to_add.each do |new_copy|
-        #copy_hash[new_copy] = 0 unless copy_hash.has_key?(new_copy)
-        copy_hash[new_copy] += (old_copies + 1)
+    number_of_scratchcards[current_card_number] += 1
+    new_copies.each do |number|
+        number_of_scratchcards[number] += number_of_scratchcards[current_card_number]
     end
 end
 
-puts copy_hash.values.sum
-
-#TODO: THIS IS TO LOW!
+puts "==================="
+puts number_of_scratchcards.values.sum
+puts "==================="
