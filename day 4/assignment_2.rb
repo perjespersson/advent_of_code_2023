@@ -207,6 +207,7 @@ Card 205: 85 47  9 91 79 52 28 26 19 33 | 61 75 46 17 16 34 98  3 62 56 74 54 88
 Card 206: 80 39 46 82 49 98 73 32 85 15 | 90 60 47 54 59 41 20 33 92 11 88 61 99 84 94 78 71 35 55  2 51 40 67 18 66"
 
 number_of_scratchcards = Hash.new(0)
+
 input.each_line.with_index do |line, index|
     winning_numbers = line.partition(":").last.partition("|").first.split
     card_numbers = line.partition(":").last.partition("|").last.split
