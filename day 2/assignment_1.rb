@@ -113,7 +113,7 @@ input.each_line do |line|
     games = line.partition(":").last
 
     games.split("\n") do |game|
-        approved_set = true
+        approved_set? = true
 
         game.gsub(";", ",").split(",").each do |set|
 
@@ -128,7 +128,7 @@ input.each_line do |line|
             end
         end
 
-        ids.push(id) if approved_set
+        ids.push(id) if approved_set?
     end
 end
 
