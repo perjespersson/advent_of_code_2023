@@ -1018,18 +1018,18 @@ regex = /(?=(one|two|three|four|five|six|seven|eight|nine|0|1|2|3|4|5|6|7|8|9))/
 all_digits = []
 
 input.each_line do |line|
-    digits_in_string = line.scan(regex).flatten
-    digits = []
+  digits_in_string = line.scan(regex).flatten
+  digits = []
 
-    digits_in_string.each do |digit|
-        if digit.to_i == 0 # It's a string
-            digits.push(digits_in_string_table[digit])
-        else
-            digits.push(digit)
-        end
-    end
+  digits_in_string.each do |digit|
+      if digit.to_i == 0 # It's a string
+          digits.push(digits_in_string_table[digit])
+      else
+          digits.push(digit)
+      end
+  end
 
-    all_digits.push((digits.first + digits.last).to_i)
+  all_digits.push((digits.first + digits.last).to_i)
 end
 
 puts "================="
