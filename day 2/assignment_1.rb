@@ -100,7 +100,7 @@ Game 98: 11 red, 8 green, 9 blue; 3 blue, 1 green, 14 red; 10 blue, 2 red, 4 gre
 Game 99: 3 green, 2 blue, 1 red; 15 red, 8 blue, 7 green; 18 red, 12 blue, 2 green
 Game 100: 11 red, 1 blue, 2 green; 3 red, 3 green; 1 blue, 8 red, 4 green; 5 green, 5 blue, 1 red; 2 green, 1 red, 6 blue; 2 green, 8 red, 1 blue"
 
-rules = {
+colors_amount = {
     "red" => 12,
     "green" => 13,
     "blue" => 14
@@ -115,12 +115,13 @@ input.each_line do |line|
     games.split("\n") do |game|
         approved_set? = true
 
+        # Merge all games set together
         game.gsub(";", ",").split(",").each do |set|
 
             amount = set.split.first
             color = set.split.last
 
-            if rules[color] >= amount.to_i
+            if colors_amount[color] >= amount.to_i
                 next
             else
                 approved_set = false
