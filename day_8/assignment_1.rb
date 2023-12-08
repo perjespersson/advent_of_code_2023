@@ -753,6 +753,8 @@ LQS = (TCN, FLS)
 PGG = (NJD, QCG)
 "
 
+start_time = (Time.now.to_f * 1000).to_i
+
 splitted_input = input.split("\n")
 instruction_sequence = splitted_input.first.split("")
 steps = []
@@ -784,6 +786,9 @@ while current_element[:element] != "ZZZ" do
   counter += 1
 end
 
+end_time = (Time.now.to_f * 1000).to_i
+
 puts "========="
-puts counter
+puts "Amount of steps: #{counter}"
+puts "Total time: #{end_time - start_time} ms"
 puts "========="
